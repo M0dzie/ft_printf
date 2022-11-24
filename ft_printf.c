@@ -6,25 +6,26 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:12:01 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/23 18:30:28 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:59:36 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static char	*check_type(const char *s)
-{
-	size_t	i;
+// static void	check_type(const char *s)
+// {
+// 	size_t	i;
+// 	char	*set;
 
-	i = 0;
-	while (((char *)s)[i])
-	{
-		if (s[i - 1] == '%')
-			return ((char *)s + i);
-		i++;
-	}
-	return (NULL);
-}
+// 	i = 0;
+// 	set = "cspdiuxX";
+// 	while (s[i])
+// 	{
+// 		if (s[i - 1] == '%' && ft_strcmp(s, set))
+// 			return ((char)s[i]);
+// 		i++;
+// 	}
+// }
 
 /**
  * @brief formats and prints its arguments, after the first, under control of 
@@ -32,29 +33,55 @@ static char	*check_type(const char *s)
  * @param s
  * @return display messages as well as values on the standard output device
  */
-int	ft_printf(const char *s, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list	first_arg;
-	char	*check_arg;
-	int		d;
+	(void)format;
+	return (0);
+	va_list	arg;
+	size_t	len;
+	char	*set;
 
-	va_start(first_arg, s);
-	check_arg = check_type(s);
-	if (check_arg == ('d'))
+	len = 0;
+	set = "cspiudxX";
+	va_start(arg, format);
+	if (write(1, 0, 0) != 0)
+		return (-1);
+	while (format[len])
 	{
-		d = va_arg(first_arg, int);
-		ft_putnbr_base(d, 10);
+		if (format[len - 1] == '%' && ft_strcmp(format, set))
+			len += ft_switch(&arg, format + len);
+		else if (format[len - 1] == '%' && format[len] == '%')
+			ft_putstr(format); //supprimer un %
+		len++;
 	}
-	if (check_arg == '\0' || '%')
-		ft_putstr_fd(s, 1);
-	va_end(first_arg);
+	va_end(arg);
+	return (len);
 }
 
 #include <stdio.h>
 
 int	main(void)
 {
-	ft_printf("21543");
-	printf("Salut a tous");
+	int i = 0;
+	ft_printf("Salut a tous");
+	printf("\n");
+	printf("Salut a tous\n");
+	ft_printf("Salu%%t a tous");
+	printf("\n");
+	printf("Salu%%t a tous\n");
+	ft_printf("123456789");
+	printf("\n");
+	printf("123456789\n");
+	ft_printf("%d", i);
+	printf("\n");
+	printf("%d\n", i);
 	return (0);
 }
+
+//renvoyer une len qu'il faut calculer depuis le debut / mais aussi 
+//des arguments
+//si oui, renvoyer sur une fonction qui va_arg et qui set le bon type 
+//(int, char, etc)
+//faire une fonction pour chaque type
+
+//bien reutiliser mes fonctions_fd

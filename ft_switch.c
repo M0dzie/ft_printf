@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_switch.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:33:03 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/24 13:53:31 by thmeyer          ###   ########.fr       */
+/*   Created: 2022/11/24 13:23:44 by thmeyer           #+#    #+#             */
+/*   Updated: 2022/11/24 13:59:20 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
-# include <stdarg.h>
-# include "../Libft/libft.h"
+#include "libftprintf.h"
 
-int		ft_printf(const char *s, ...);
-void	ft_putnbr_base(int nbr, char *base);
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-int		ft_strcmp(const char *s1, const char *s2);
-int		ft_switch(va_list arg, const char *format);
-#endif
+int	ft_switch(va_list *arg, const char *format)
+{
+	if (format == 'd')
+		ft_putnbr_base(va_arg(*arg, int), "0123456789");
+}

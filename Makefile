@@ -6,16 +6,16 @@
 #    By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 10:03:53 by thmeyer           #+#    #+#              #
-#    Updated: 2022/11/23 16:52:14 by thmeyer          ###   ########.fr        #
+#    Updated: 2022/11/24 13:38:38 by thmeyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-NAME_LIB = libft.a
 
 HEADER = libftprintf.h
-HEADER_DIR = ../Libft
-PRINTF_DIR = ../ft_printf/
+
+LIBFT = Libft/libft.a
+LIBFT_DIR = Libft
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -25,32 +25,37 @@ ARFLAGS = -rcs
 
 RM = rm -rf
 
-SRC_LIB = 
-
 SRCS = ft_printf.c \
+	ft_basic_ft.c \
+	ft_switch.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=obj/%.o)
 
-all: $(NAME)
+all: directory $(NAME)
 
-$(NAME): $(OBJS)
-	$(MAKE) -C $(HEADER_DIR)
-	cp $(HEADER_DIR) $(NAME_LIB) $(PRINTF_DIR)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(NAME_LIB)
+# rsc:
+# 	@make -C $(LIBFT_DIR)
 
-%.o: %.c Makefile $(HEADER)
-	$(CC) $(CFLAGS) -o $@ -c $<
+$(NAME): $(OBJS) $(LIBFT)
+	$(MAKE) -C $(LIBFT_DIR)
+	cp $(LIBFT) $(NAME)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+
+obj/%.o: %.c Makefile $(HEADER)
+	$(CC) $(CFLAGS) -I$(HEADER) -o $@ -c $<
 
 clean:
 	$(RM) $(OBJ)
-	$(MAKE) clean -C $(HEADER_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
 
 
 fclean: clean
-	$(RM) $(NAME) $(NAME_LIB)
-	$(MAKE) fclean -C $(HEADER_DIR)
+	$(RM) $(NAME)
+	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
-	$(MAKE) re -C $(HEADER_DIR)
-		
-.PHONY: all clean fclean re
+
+directory:
+	mkdir obj
+
+.PHONY: all clean fclean re directory
