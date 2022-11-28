@@ -6,16 +6,71 @@
 #    By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 10:03:53 by thmeyer           #+#    #+#              #
-#    Updated: 2022/11/24 13:38:38 by thmeyer          ###   ########.fr        #
+#    Updated: 2022/11/28 15:54:22 by thmeyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# NAME = libftprintf.a
+
+# HEADER = libftprintf.h
+
+# LIBFT = Libft/libft.a
+# LIBFT_DIR = Libft
+
+# CC = gcc
+# CFLAGS = -Wall -Wextra -Werror
+
+# AR = ar
+# ARFLAGS = -rcs
+
+# RM = rm -rf
+
+# SRCS = ft_printf.c \
+# 	ft_basic_ft.c \
+# 	ft_switch.c
+
+# OBJS = $(SRCS:%.c=obj/%.o)
+
+# all: directory rsc $(NAME)
+
+# rsc:
+# 	@make -C $(LIBFT_DIR)
+
+# $(NAME): $(OBJS) $(LIBFT)
+# 	$(MAKE) -C $(LIBFT_DIR)
+# 	cp $(LIBFT) $(NAME)
+# 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+
+# obj/%.o: %.c Makefile $(HEADER)
+# 	$(CC) $(CFLAGS) -I$(HEADER) -o $@ -c $<
+
+# clean:
+# 	$(RM) $(OBJS)
+# 	$(MAKE) clean -C $(LIBFT_DIR)
+
+
+# fclean: clean
+# 	$(RM) $(NAME)
+# 	$(MAKE) fclean -C $(LIBFT_DIR)
+
+# re: fclean all
+
+# directory:
+# 	@mkdir obj
+
+# .PHONY: all clean fclean re directory
+
 NAME = libftprintf.a
+LIBFT_NAME = libft.a
 
-HEADER = libftprintf.h
+MAKEFILE = Makefile
 
-LIBFT = Libft/libft.a
+HEADER = ft_printf.h
+
 LIBFT_DIR = Libft
+PRINTF_DIR = ../printf
+
+LIBFT = $(LIBFT_DIR)/$(LIBFT_NAME)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -27,35 +82,30 @@ RM = rm -rf
 
 SRCS = ft_printf.c \
 	ft_basic_ft.c \
-	ft_switch.c
+	ft_putnbr.c \
+	ft_print_address.c
 
-OBJS = $(SRCS:%.c=obj/%.o)
+OBJS = $(SRCS:.c=.o)
 
-all: directory $(NAME)
+all: $(NAME)
 
-# rsc:
-# 	@make -C $(LIBFT_DIR)
-
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
-	cp $(LIBFT) $(NAME)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	cp $(LIBFT) $(PRINTF_DIR)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(LIBFT_NAME)
 
-obj/%.o: %.c Makefile $(HEADER)
-	$(CC) $(CFLAGS) -I$(HEADER) -o $@ -c $<
+%.o: %.c $(MAKEFILE) $(HEADER)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
-
-
+    
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
+	$(MAKE) re -C $(LIBFT_DIR)
 
-directory:
-	mkdir obj
-
-.PHONY: all clean fclean re directory
+.PHONY: all clean fclean re

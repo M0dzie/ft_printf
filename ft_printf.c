@@ -6,26 +6,37 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:12:01 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/24 13:59:36 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:09:04 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-// static void	check_type(const char *s)
-// {
-// 	size_t	i;
-// 	char	*set;
+static int	check_type(const char format, va_list arg)
+{
+	int	print_len;
 
-// 	i = 0;
-// 	set = "cspdiuxX";
-// 	while (s[i])
-// 	{
-// 		if (s[i - 1] == '%' && ft_strcmp(s, set))
-// 			return ((char)s[i]);
-// 		i++;
-// 	}
-// }
+	print_len = 0;
+	if (format == 'c')
+		print_len += ft_printchar(va_arg (arg, int));
+	else if (format == 's')
+		print_len += ft_printstr(va_arg(arg, char *));
+	// else if (format == 'p')
+	// 	print_len += 
+	else if (format == 'd' || format == 'i')
+		print_len += ft_printnbr_base(va_arg(arg, int), "0123456789");
+	else if (format == 'u')
+		print_len += ft_printunsigned(va_arg(arg, unsigned int), "0123456789");
+	else if (format == 'x')
+		print_len += ft_printnbr_base(va_arg(arg, int), "0123456789abcdef");
+	else if (format == 'X')
+		print_len += ft_printnbr_base(va_arg(arg, int), "0123456789ABCDEF");
+	else if (format == '%')
+		print_len += ft_printchar('%');
+	else
+		print_len += ft_printchar(format);
+	return (print_len);
+}
 
 /**
  * @brief formats and prints its arguments, after the first, under control of 
@@ -35,53 +46,27 @@
  */
 int	ft_printf(const char *format, ...)
 {
-	(void)format;
-	return (0);
 	va_list	arg;
-	size_t	len;
-	char	*set;
+	int		print_len;
+	int		len_temp;
+	int		i;
 
-	len = 0;
-	set = "cspiudxX";
+	i = 0;
+	print_len = 0;
 	va_start(arg, format);
 	if (write(1, 0, 0) != 0)
 		return (-1);
-	while (format[len])
+	while (format[i])
 	{
-		if (format[len - 1] == '%' && ft_strcmp(format, set))
-			len += ft_switch(&arg, format + len);
-		else if (format[len - 1] == '%' && format[len] == '%')
-			ft_putstr(format); //supprimer un %
-		len++;
+		len_temp = print_len;
+		if (format[i] == '%' && format[i + 1] != '\0')
+			print_len += check_type(format[++i], arg);
+		else if (format[i] != '%')
+			print_len += ft_printchar(format[i]);
+		if (print_len < len_temp)
+			return (-1);
+		i++;
 	}
 	va_end(arg);
-	return (len);
+	return (print_len);
 }
-
-#include <stdio.h>
-
-int	main(void)
-{
-	int i = 0;
-	ft_printf("Salut a tous");
-	printf("\n");
-	printf("Salut a tous\n");
-	ft_printf("Salu%%t a tous");
-	printf("\n");
-	printf("Salu%%t a tous\n");
-	ft_printf("123456789");
-	printf("\n");
-	printf("123456789\n");
-	ft_printf("%d", i);
-	printf("\n");
-	printf("%d\n", i);
-	return (0);
-}
-
-//renvoyer une len qu'il faut calculer depuis le debut / mais aussi 
-//des arguments
-//si oui, renvoyer sur une fonction qui va_arg et qui set le bon type 
-//(int, char, etc)
-//faire une fonction pour chaque type
-
-//bien reutiliser mes fonctions_fd
