@@ -6,7 +6,7 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:06:41 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/28 15:56:53 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:51:34 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,4 @@ int	ft_printstr(char *str)
 	if (!str)
 		write(1, "(null)", 6);
 	return (write(1, str, ft_strlen(str)));
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
 }

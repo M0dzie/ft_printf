@@ -6,7 +6,7 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:52:48 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/28 16:23:49 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:00:13 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ static size_t	digit_count(long int n)
 int	ft_printnbr_base(int nbr, char *base)
 {
 	int			len;
-	int			count;
 	long int	l_nbr;
 
 	l_nbr = nbr;
-	count = 0;
 	len = ft_strlen(base);
 	if (l_nbr < 0)
 	{
@@ -60,20 +58,33 @@ int	ft_printnbr_base(int nbr, char *base)
 	return (digit_count(l_nbr));
 }
 
-int	ft_printunsigned(int nbr, char *base)
+int	ft_printunsigned(int nbr)
 {
-	int			len;
-	int			count;
 	long int	l_nbr;
 
 	l_nbr = nbr;
-	count = 0;
-	len = ft_strlen(base);
 	if (l_nbr < 0)
 		l_nbr = 4294967296 + l_nbr;
-	if (l_nbr >= len)
-		ft_printnbr_base((l_nbr / len), base);
+	if (l_nbr >= 10)
+		ft_printunsigned(l_nbr / 10);
 	if (l_nbr >= 0)
-		ft_printchar(base[l_nbr % len]);
+		ft_printchar((l_nbr % 10) + 48);
 	return (digit_count(l_nbr));
+}
+
+int	ft_print_address(unsigned int nbr, char *base)
+{
+	unsigned int	len;
+	int				address;
+
+	if (!nbr)
+		return (ft_printstr("0x0"));
+	address = 0;
+	address += ft_printstr("0x");
+	len = ft_strlen(base);
+	if (nbr >= len)
+		ft_printnbr_base((nbr / len), base);
+	if (nbr >= 0)
+		ft_printchar(base[nbr % len]);
+	return (digit_count(nbr) + address);
 }

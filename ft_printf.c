@@ -6,7 +6,7 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:12:01 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/28 16:09:04 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/11/28 17:56:30 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static int	check_type(const char format, va_list arg)
 		print_len += ft_printchar(va_arg (arg, int));
 	else if (format == 's')
 		print_len += ft_printstr(va_arg(arg, char *));
-	// else if (format == 'p')
-	// 	print_len += 
+	else if (format == 'p')
+		print_len += ft_print_address((unsigned int)va_arg(arg, void *),
+				"0123456789abcdef");
 	else if (format == 'd' || format == 'i')
 		print_len += ft_printnbr_base(va_arg(arg, int), "0123456789");
 	else if (format == 'u')
-		print_len += ft_printunsigned(va_arg(arg, unsigned int), "0123456789");
+		print_len += ft_printunsigned(va_arg(arg, unsigned int));
 	else if (format == 'x')
 		print_len += ft_printnbr_base(va_arg(arg, int), "0123456789abcdef");
 	else if (format == 'X')
@@ -37,6 +38,20 @@ static int	check_type(const char format, va_list arg)
 		print_len += ft_printchar(format);
 	return (print_len);
 }
+
+// int	ft_print_address(void *address)
+// {
+// 	int	len;
+
+// 	len = 0;
+// 	if (!address)
+// 		return (ft_printstr("0x0"));
+// 	len += ft_printstr("0x");
+// 	len += ft_printunsigned(&address);
+// 	if (len == -1)
+// 		return (-1);
+// 	return (len);
+// }
 
 /**
  * @brief formats and prints its arguments, after the first, under control of 

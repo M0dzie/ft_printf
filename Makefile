@@ -6,7 +6,7 @@
 #    By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 10:03:53 by thmeyer           #+#    #+#              #
-#    Updated: 2022/11/28 15:54:22 by thmeyer          ###   ########.fr        #
+#    Updated: 2022/11/28 17:46:58 by thmeyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,6 @@ MAKEFILE = Makefile
 HEADER = ft_printf.h
 
 LIBFT_DIR = Libft
-PRINTF_DIR = ../printf
 
 LIBFT = $(LIBFT_DIR)/$(LIBFT_NAME)
 
@@ -82,8 +81,7 @@ RM = rm -rf
 
 SRCS = ft_printf.c \
 	ft_basic_ft.c \
-	ft_putnbr.c \
-	ft_print_address.c
+	ft_printnbr.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -91,7 +89,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
-	cp $(LIBFT) $(PRINTF_DIR)
+	cp $(LIBFT) .
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(LIBFT_NAME)
 
 %.o: %.c $(MAKEFILE) $(HEADER)
@@ -103,6 +101,7 @@ clean:
     
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(LIBFT_NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
 re: fclean all
