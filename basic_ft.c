@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   basic_ft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 16:33:03 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/29 13:53:32 by thmeyer          ###   ########.fr       */
+/*   Created: 2022/11/23 15:06:41 by thmeyer           #+#    #+#             */
+/*   Updated: 2022/11/29 13:54:04 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <stdarg.h>
-# include "Libft/libft.h"
+#include "ft_printf.h"
 
-int	ft_printf(const char *s, ...);
-int	printnbr_base(int nbr, char *base);
-int	printhex_base(unsigned int nbr, char *base);
-int	print_unsigned(unsigned int nbr);
-int	printchar(int c);
-int	print_address(unsigned long addr, char *base, int first);
-int	printstr(char *str);
-#endif
+int	printchar(int c)
+{
+	return (write(1, &c, 1));
+}
+
+int	printstr(char *str)
+{
+	if (!str)
+		return (write(1, "(null)", 6));
+	return (write(1, str, ft_strlen(str)));
+}

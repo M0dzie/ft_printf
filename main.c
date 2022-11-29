@@ -6,7 +6,7 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:31:55 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/28 17:26:22 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:20:36 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@
 int	main(void)
 {
 	char *s = "Salut a tous";
-	int	x = 77805;
+	int	x = -77805;
 	int X = x;
-	void *p = s;
+	void *p = -48526;
 	printf("%% error :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : Salut%z a tous"));
 	printf("\ntaille : %d\n\n", printf("real : Salut%z a tous"));
 	printf("%% at the end :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : 123456789%"));
 	printf("\ntaille : %d\n\n", printf("real : 123456789%"));
+	printf("%%c but without arg :\n");
+	printf("\ntaille : %d\n", ft_printf("mine : Salu%ct a tous"));
+	printf("\ntaille : %d\n\n", printf("real : Salu%ct a tous"));
 	printf("Write %% :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : Salu%%t a tous"));
 	printf("\ntaille : %d\n\n", printf("real : Salu%%t a tous"));
