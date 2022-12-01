@@ -6,7 +6,7 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 10:12:01 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/12/01 09:01:42 by thmeyer          ###   ########.fr       */
+/*   Updated: 2022/12/01 11:10:09 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	print_len = 0;
 	va_start(arg, format);
-	if (!format)
-		return (0);
 	if (write(1, 0, 0) != 0)
 		return (-1);
 	while (format[i])
