@@ -37,6 +37,9 @@ int	main(void)
 	printf("Testing %%s :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : %s et %s", s, s));
 	printf("\ntaille : %d\n\n", printf("real : %s et %s", s, s));
+	printf("Testing 2 %%s but with 1 arg :\n");
+	printf("\ntaille : %d\n", ft_printf("mine : %s et %s", s));
+	printf("\ntaille : %d\n\n", printf("real : %s et %s", s));
 	printf("Testing %%p :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : %p", p));
 	printf("\ntaille : %d\n\n", printf("real : %p", p));
