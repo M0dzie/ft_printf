@@ -55,5 +55,11 @@ int	main(void)
 	printf("Testing %%X :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : %X", X));
 	printf("\ntaille : %d\n\n", printf("real : %X", X));
+	printf("Testing solo %% w/o arg :\n");
+	printf("\ntaille : %d\n", ft_printf("%"));
+	printf("\ntaille : %d\n\n", printf("%"));
+	printf("Testing NULL w/o arg:\n");
+	printf("\ntaille : %d\n", ft_printf(NULL, X));
+	printf("\ntaille : %d\n\n", printf(NULL, X));
 	return (0);
 }
