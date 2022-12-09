@@ -28,6 +28,9 @@ int	main(void)
 	printf("%%c but without arg :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : Salu%ct a tous"));
 	printf("\ntaille : %d\n\n", printf("real : Salu%ct a tous"));
+	printf("%%c but with wrong arg :\n");
+	printf("\ntaille : %d\n", ft_printf("mine : %c", s));
+	printf("\ntaille : %d\n\n", printf("real : %c", s));
 	printf("Write %% :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : Salu%%t a tous"));
 	printf("\ntaille : %d\n\n", printf("real : Salu%%t a tous"));
