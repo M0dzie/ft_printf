@@ -6,7 +6,7 @@
 #    By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/22 10:03:53 by thmeyer           #+#    #+#              #
-#    Updated: 2022/12/06 09:15:50 by thmeyer          ###   ########.fr        #
+#    Updated: 2024/07/05 20:14:42 by thmeyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,3 @@ re: fclean
 	make all
 
 .PHONY: all clean fclean re
-d
-d
-d
