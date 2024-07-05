@@ -6,7 +6,7 @@
 /*   By: thmeyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:31:55 by thmeyer           #+#    #+#             */
-/*   Updated: 2022/11/29 13:20:36 by thmeyer          ###   ########.fr       */
+/*   Updated: 2023/02/11 19:20:38 by thmeyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int	main(void)
 	int	x = -77805;
 	int X = x;
 	void *p = -48526;
+	printf("%%s with NULL arg:\n");
+	ft_printf("%s\n", NULL);
+	ft_printf("%x\n", (int)0xFFFFFFFF);
 	printf("%% error :\n");
 	printf("\ntaille : %d\n", ft_printf("mine : Salut%z a tous"));
 	printf("\ntaille : %d\n\n", printf("real : Salut%z a tous"));
